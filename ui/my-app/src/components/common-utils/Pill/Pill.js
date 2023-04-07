@@ -40,9 +40,11 @@ class Pill extends React.Component{
       }
    
     render(){
+        const cardName = this.props.card + this.props.excessChar;
         return (
             <div className="button"> {this.props.card}
-            <button className="remove" name={this.props.card} onClick={this.removeChoice}>x</button>
+            <p className="excessCharacters">{this.props.excessChar}</p>
+            <button className="remove" name={cardName} onClick={this.removeChoice}>x</button>
             </div>
         );
     }

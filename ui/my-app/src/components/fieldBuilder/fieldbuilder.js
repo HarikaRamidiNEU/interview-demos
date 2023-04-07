@@ -148,21 +148,23 @@ class FieldBuilder extends React.Component{
      * @param {*} choice 
      */
     addChoices(choice){
-      let choicesObj = JSON.parse(localStorage.getItem('fieldObj'));
-      if(choicesObj.choices.length === 50){
-        this.setState({formErrors: true});
-        this.setState({error: 'Max 50 choices are only allowed'})
+      if(choice && choice !== '' && choice !== ' '){
+        let choicesObj = JSON.parse(localStorage.getItem('fieldObj'));
+        if(choicesObj.choices.length === 50){
+          this.setState({formErrors: true});
+          this.setState({error: 'Max 50 choices are only allowed'})
+        }
+        else if(choicesObj.choices.filter(c => c === choice).length !== 0){
+          this.setState({formErrors: true});
+          this.setState({error: 'Duplicate choices are not allowed'})
+        }
+        else{
+          this.props.add(choice);
+          let fieldsObj = JSON.parse(localStorage.getItem('fieldObj'));
+          fieldsObj.choices.push(choice);
+          localStorage.setItem('fieldObj',JSON.stringify(fieldsObj));
+        }  
       }
-      else if(choicesObj.choices.filter(c => c === choice).length !== 0){
-        this.setState({formErrors: true});
-        this.setState({error: 'Duplicate choices are not allowed'})
-      }
-      else{
-        this.props.add(choice);
-        let fieldsObj = JSON.parse(localStorage.getItem('fieldObj'));
-        fieldsObj.choices.push(choice);
-        localStorage.setItem('fieldObj',JSON.stringify(fieldsObj));
-      }  
     }
 
     /**
@@ -204,7 +206,8 @@ class FieldBuilder extends React.Component{
     let items, card;
     if(choices){
         items = choices.map((t,i) => <Card 
-    card={t} 
+    card={t.substr(0,40)} 
+    excessChar={t.substr(40, t.length)}
     key={i} 
     index={i}
     selectedHandler={this.props.selectedHandler}/>)
