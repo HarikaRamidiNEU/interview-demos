@@ -129,8 +129,8 @@ class FieldBuilder extends React.Component{
     setChoices(event) {
       if(event.key === 'Enter') {
         const val = event.target.value;
-        if(val.includes("\\n")){
-          const choicesArray = val.split("\\n");
+        if(val.includes("\n")){
+          const choicesArray = val.split("\n");
           let i=0;
           while(i < choicesArray.length){
             this.addChoices(choicesArray[i++]);
@@ -249,7 +249,6 @@ class FieldBuilder extends React.Component{
        <div className="fieldsContainer">
           <label className="mainLabel">Choices</label>
           <section>
-          <input type="text" onKeyDown={this.setChoices}/>
           <textarea onKeyDown={this.setChoices} />
           {card}
           </section>
