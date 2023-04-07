@@ -30,6 +30,6 @@ Your app is ready to be deployed!
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
 
-##Application
+### Application
 Using this application we can build fields with maximum of choices and an ability to multiselect and display the choices either in alphabetic or reverse alphabetic orders.
 
